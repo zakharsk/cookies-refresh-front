@@ -35,9 +35,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
-          <main className={'flex min-h-full items-center justify-center'}>
-            {children}
-          </main>
+          <main className={'flex justify-center'}>{children}</main>
           <Toaster />
           <TailwindIndicator />
           <Analytics />

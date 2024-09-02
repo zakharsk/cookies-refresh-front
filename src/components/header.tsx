@@ -3,10 +3,10 @@ import { ModeToggle } from '@/components/modeToggle';
 
 export function Header() {
   return (
-    <header className={'flex justify-around py-4'}>
+    <header className={'flex items-center justify-around py-4'}>
       <Link href="/">Home</Link>
-      <Link href="/login">Login</Link>
       <Link href="/users">Users</Link>
+      <Link href="/login">Login</Link>
       <ModeToggle />
     </header>
   );
