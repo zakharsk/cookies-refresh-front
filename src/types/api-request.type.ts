@@ -3,4 +3,5 @@ export type TApiRequest = {
   method?: 'GET' | 'POST' | 'PATCH' | 'DELETE';
   version?: string;
   bearerToken?: string;
+  refresh?: boolean;
 };

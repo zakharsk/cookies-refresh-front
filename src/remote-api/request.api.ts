@@ -4,6 +4,7 @@ import { NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
 import { parseCookie } from '@/lib';
 import { TApiRequest, TApiResponse } from '@/types';
+import { accessTokenCookieName, refreshTokenCookieName } from '@/constants';
 
 export async function apiRequest<T>(params: TApiRequest) {
   const apiHost = process.env.API_HOST;
@@ -18,6 +19,19 @@ export async function apiRequest<T>(params: TApiRequest) {
   });
   if (params.bearerToken) {
     request.headers.set('Authorization', `Bearer ${params.bearerToken}`);
+  }
+
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get(accessTokenCookieName);
+  if (accessToken && accessToken.value) {
+    request.cookies.set(accessTokenCookieName, accessToken.value);
+  }
+
+  if (params.refresh) {
+    const refreshToken = cookieStore.get(refreshTokenCookieName);
+    if (refreshToken && refreshToken.value) {
+      request.cookies.set(refreshTokenCookieName, refreshToken.value);
+    }
   }
 
   let apiResponse: TApiResponse<T> = {
