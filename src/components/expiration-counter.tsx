@@ -25,7 +25,7 @@ export default function ExpirationCounter(props: ExpirationCounterProps) {
     }
 
     return () => clearInterval(intervalId);
-  }, [counter]);
+  }, [counter, props.exp]);
 
   return <span>{counter > 0 ? msToMinAndSec(counter) : 'Expired'}</span>;
 }
