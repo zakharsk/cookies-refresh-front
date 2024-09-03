@@ -1,5 +1,7 @@
 'use client';
 
+import { TrashIcon } from '@radix-ui/react-icons';
+
 import { expireCookie } from '@/actions';
 import { Button } from '@/components/ui/button';
 
@@ -14,7 +16,7 @@ export default function ExpireButton(props: TExpireButtonProps) {
   };
   return (
     <Button onClick={onExpireButtonClick} disabled={props.disabled}>
-      Expire
+      <TrashIcon className="mr-2 size-4" /> Expire
     </Button>
   );
 }

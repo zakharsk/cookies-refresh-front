@@ -20,8 +20,8 @@ export default async function UsersPage() {
       </TableHeader>
       <TableBody>
         {users
-          ? users.map((user) => (
-              <TableRow key={user.id}>
+          ? users.map((user, index) => (
+              <TableRow key={index}>
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.login}</TableCell>
               </TableRow>

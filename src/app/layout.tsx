@@ -35,7 +35,7 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased flex flex-col gap-4',
+          'min-h-screen bg-background font-sans antialiased flex flex-col gap-4 px-4',
           inter.className,
         )}
       >
