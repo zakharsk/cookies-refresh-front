@@ -1,7 +1,7 @@
 'use server';
 
 import { extractUserId } from '@/actions';
-import { apiRequest } from '@/remote-api/request.api';
+import { apiRequest } from '@/api/request.api';
 import { TUser } from '@/types';
 
 export async function getUserCurrent() {

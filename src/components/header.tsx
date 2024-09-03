@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ModeToggle } from '@/components/mode-toggle';
-import { getUserCurrent } from '@/remote-api';
+import { getUserCurrent } from '@/api';
 import AuthLink from '@/components/auth-link';
 
 export async function Header() {

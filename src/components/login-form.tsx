@@ -32,7 +32,6 @@ export function LoginForm() {
 
   async function onSubmit(values: LoginFormSchema) {
     const res = await submitLoginForm(values);
-    console.log(res);
     if (res.status === 200) router.push('/account');
     if (res.status === 401) {
       toast({
