@@ -1,7 +1,8 @@
 'use server';
-import { cookies } from 'next/headers';
-import { accessTokenCookieName, refreshTokenCookieName } from '@/constants';
 import { jwtVerify } from 'jose/jwt/verify';
+import { cookies } from 'next/headers';
+
+import { accessTokenCookieName, refreshTokenCookieName } from '@/constants';
 
 async function verifyToken(jwt: string, jwtSecret: string | undefined) {
   if (!jwtSecret) return;

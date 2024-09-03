@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { ModeToggle } from '@/components/mode-toggle';
+
 import { getUserCurrent } from '@/api';
 import AuthLink from '@/components/auth-link';
+import { ModeToggle } from '@/components/mode-toggle';
 
 export async function Header() {
   const user = await getUserCurrent();

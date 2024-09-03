@@ -1,14 +1,20 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+// eslint-disable-next-line import/order
 import './globals.css';
-import { cn } from '@/lib/utils';
+import { ReactNode } from 'react';
+
+import { Header } from '@/components/header';
+import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
-import { TailwindIndicator } from '@/components/tailwind-indicator';
+
+// eslint-disable-next-line import/order
 import { Analytics } from '@vercel/analytics/next';
+// eslint-disable-next-line import/order
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { ReactNode } from 'react';
-import { Header } from '@/components/header';
+
+import { cn } from '@/lib/utils';
 
 const inter = Inter({ subsets: ['latin'] });
 

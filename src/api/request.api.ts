@@ -1,10 +1,11 @@
 'use server';
 
-import { NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
+import { NextRequest } from 'next/server';
+
+import { accessTokenCookieName, refreshTokenCookieName } from '@/constants';
 import { parseCookie } from '@/lib';
 import { TApiRequest, TApiResponse } from '@/types';
-import { accessTokenCookieName, refreshTokenCookieName } from '@/constants';
 
 export async function apiRequest<T>(params: TApiRequest) {
   const apiHost = process.env.API_HOST;
@@ -34,7 +35,7 @@ export async function apiRequest<T>(params: TApiRequest) {
     }
   }
 
-  let apiResponse: TApiResponse<T> = {
+  const apiResponse: TApiResponse<T> = {
     status: 0,
     data: null,
   };
@@ -58,10 +59,11 @@ export async function apiRequest<T>(params: TApiRequest) {
     if (contentTypeHeader && contentTypeHeader.includes('application/json')) {
       apiResponse.data = (await response.json()) as T;
     }
-  } catch (err: any) {
-    console.error('Remote API request:', err.message);
+  } catch (err) {
+    const error = err as Error;
+    console.error('Remote API request:', error.message);
     apiResponse.data = {
-      message: err.message,
+      message: error.message,
       statusCode: 0,
     };
   }

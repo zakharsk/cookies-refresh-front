@@ -39,10 +39,13 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.7",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "postcss": "^8",
     "prettier": "3.3.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@8.10.2+sha1.e0b68270e89c817ff88b7be62466a2128c53af02"
 }

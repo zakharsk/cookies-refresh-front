@@ -1,5 +1,6 @@
-import { TUser } from '@/types';
 import Link from 'next/link';
+
+import { TUser } from '@/types';
 
 type TAuthLinkProps = {
   user: TUser | undefined;

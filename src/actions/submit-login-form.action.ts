@@ -1,7 +1,7 @@
 'use server';
 
-import { LoginFormSchema } from '@/schemas';
 import { apiRequest } from '@/api';
+import { LoginFormSchema } from '@/schemas';
 
 export async function submitLoginForm(formData: LoginFormSchema) {
   formData.login = encodeURIComponent(formData.login);
