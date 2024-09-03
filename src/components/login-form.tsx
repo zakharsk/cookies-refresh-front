@@ -147,25 +147,6 @@ export function LoginForm() {
           </Button>
         </form>
       </Form>
-      {/*{timer > 2 ? (*/}
-      {/*  <div className={'space-y-2 text-center'}>*/}
-      {/*    <p className={'break-words'}>*/}
-      {/*      It's been {timer} seconds since you clicked Login.*/}
-      {/*      <br />*/}
-      {/*      It seems that the API server was down for a period of inactivity.*/}
-      {/*      Hosting is preempting that "Your free instance will spin down with*/}
-      {/*      inactivity, which can delay requests by 50 seconds or more.". If*/}
-      {/*      nothing changes after 60 seconds, please let the{' '}*/}
-      {/*      <Link*/}
-      {/*        href={'https://github.com/zakharsk/cookies-refresh-front'}*/}
-      {/*        className={'underline'}*/}
-      {/*      >*/}
-      {/*        developer*/}
-      {/*      </Link>{' '}*/}
-      {/*      know.*/}
-      {/*    </p>*/}
-      {/*  </div>*/}
-      {/*) : null}*/}
     </section>
   );
 }
