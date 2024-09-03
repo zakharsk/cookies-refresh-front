@@ -11,9 +11,10 @@ type ExpirationCounterProps = {
 
 export default function ExpirationCounter(props: ExpirationCounterProps) {
   const [counter, setCounter] = useState<number>(1);
-  let intervalId: NodeJS.Timeout | undefined = undefined;
 
   useEffect(() => {
+    let intervalId: NodeJS.Timeout | undefined = undefined;
+
     if (counter > 0) {
       intervalId = setInterval(() => {
         const expiresIn = props.exp * 1000 - Date.now();

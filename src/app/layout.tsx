@@ -10,8 +10,6 @@ import { Toaster } from '@/components/ui/toaster';
 
 // eslint-disable-next-line import/order
 import { Analytics } from '@vercel/analytics/next';
-// eslint-disable-next-line import/order
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import { cn } from '@/lib/utils';
 
@@ -43,7 +41,6 @@ export default function RootLayout({
           <main className={'flex justify-center'}>{children}</main>
           <Toaster />
           <Analytics />
-          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
