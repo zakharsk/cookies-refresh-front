@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 
-import { accessTokenCookieName, refreshTokenCookieName } from '@/constants';
+import { accessTokenCookieName } from '@/constants';
 import { parseCookie } from '@/lib';
 import { TApiRequest, TApiResponse } from '@/types';
 
@@ -26,13 +26,6 @@ export async function apiRequest<T>(params: TApiRequest) {
   const accessToken = cookieStore.get(accessTokenCookieName);
   if (accessToken && accessToken.value) {
     request.cookies.set(accessTokenCookieName, accessToken.value);
-  }
-
-  if (params.refresh) {
-    const refreshToken = cookieStore.get(refreshTokenCookieName);
-    if (refreshToken && refreshToken.value) {
-      request.cookies.set(refreshTokenCookieName, refreshToken.value);
-    }
   }
 
   const apiResponse: TApiResponse<T> = {
