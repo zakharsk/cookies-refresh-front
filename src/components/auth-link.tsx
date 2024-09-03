@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-import { TUser } from '@/types';
+import { TCurrentUser } from '@/types';
 
 type TAuthLinkProps = {
-  user: TUser | undefined;
+  user: TCurrentUser | undefined;
 };
 
 export default async function AuthLink(props: TAuthLinkProps) {

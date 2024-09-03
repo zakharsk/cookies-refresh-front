@@ -2,14 +2,14 @@
 
 import { extractUserId } from '@/actions';
 import { apiRequest } from '@/api/request.api';
-import { TUser } from '@/types';
+import { TCurrentUser } from '@/types';
 
 export async function getUserCurrent() {
   const userId = await extractUserId();
-  const res = await apiRequest<TUser>({
+  const res = await apiRequest<TCurrentUser>({
     path: `/users/${userId}`,
   });
   if (res.status === 200 && res.data) {
-    return res.data as TUser;
+    return res.data as TCurrentUser;
   }
 }
