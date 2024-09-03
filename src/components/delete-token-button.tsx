@@ -10,13 +10,13 @@ type TExpireButtonProps = {
   disabled: boolean;
 };
 
-export default function ExpireButton(props: TExpireButtonProps) {
+export default function DeleteTokenButton(props: TExpireButtonProps) {
   const onExpireButtonClick = async () => {
     await expireCookie(props.cookieName);
   };
   return (
     <Button onClick={onExpireButtonClick} disabled={props.disabled}>
-      <TrashIcon className="mr-2 size-4" /> Expire
+      <TrashIcon className="mr-2 size-4" /> Delete
     </Button>
   );
 }

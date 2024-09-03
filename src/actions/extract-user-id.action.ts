@@ -1,15 +1,8 @@
 'use server';
-import { jwtVerify } from 'jose/jwt/verify';
 import { cookies } from 'next/headers';
 
 import { accessTokenCookieName, refreshTokenCookieName } from '@/constants';
-
-async function verifyToken(jwt: string, jwtSecret: string | undefined) {
-  if (!jwtSecret) return;
-  const secret = new TextEncoder().encode(jwtSecret);
-  const { payload } = await jwtVerify(jwt, secret);
-  return payload;
-}
+import { verifyToken } from '@/lib';
 
 export async function extractUserId() {
   const cookieStore = cookies();

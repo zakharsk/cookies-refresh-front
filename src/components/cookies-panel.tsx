@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 
-import ExpireButton from '@/components/expire-button';
+import DeleteTokenButton from '@/components/delete-token-button';
+import ExpirationTimer from '@/components/expiration-timer';
 import {
   Table,
   TableBody,
@@ -25,7 +26,8 @@ export default function CookiesPanel() {
       <TableHeader>
         <TableRow>
           <TableHead className="text-center">Name</TableHead>
-          <TableHead className="text-center">Status</TableHead>
+          <TableHead className="text-center">In browser</TableHead>
+          <TableHead className="text-center">Expires in</TableHead>
           <TableHead className="text-center">Action</TableHead>
         </TableRow>
       </TableHeader>
@@ -36,7 +38,13 @@ export default function CookiesPanel() {
             {isAccessTokenExist ? <span>&#9989;</span> : <span>&#10060;</span>}
           </TableCell>
           <TableCell className="text-center">
-            <ExpireButton
+            <ExpirationTimer
+              name={accessTokenCookie?.name}
+              token={accessTokenCookie?.value}
+            />
+          </TableCell>
+          <TableCell className="text-center">
+            <DeleteTokenButton
               cookieName={accessTokenCookieName}
               disabled={!isAccessTokenExist}
             />
@@ -50,7 +58,13 @@ export default function CookiesPanel() {
             {isRefreshTokenExist ? <span>&#9989;</span> : <span>&#10060;</span>}
           </TableCell>
           <TableCell className="text-center">
-            <ExpireButton
+            <ExpirationTimer
+              name={refreshTokenCookie?.name}
+              token={refreshTokenCookie?.value}
+            />
+          </TableCell>
+          <TableCell className="text-center">
+            <DeleteTokenButton
               cookieName={refreshTokenCookieName}
               disabled={!isRefreshTokenExist}
             />
