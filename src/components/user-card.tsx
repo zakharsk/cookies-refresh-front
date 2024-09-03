@@ -1,6 +1,9 @@
-import { ExitIcon } from '@radix-ui/react-icons';
+'use client';
 
-import { getUserCurrent } from '@/api';
+import { ExitIcon } from '@radix-ui/react-icons';
+import { useTransition } from 'react';
+
+import { logOut } from '@/actions';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -10,21 +13,32 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { TCurrentUser } from '@/types';
 
-export default async function UserCard() {
-  const user = await getUserCurrent();
-  if (!user) return;
-  return (
+type TUserCardProps = {
+  user: TCurrentUser;
+};
+
+export default function UserCard(props: TUserCardProps) {
+  const [isPending, startTransition] = useTransition();
+
+  const onLogOut = () => {
+    startTransition(async () => {
+      await logOut();
+    });
+  };
+
+  return props.user ? (
     <Card>
       <CardHeader>
-        <CardTitle>{user.login}</CardTitle>
+        <CardTitle>{props.user.login}</CardTitle>
         <CardDescription>
           The data was just retrieved from the server using AccessToken.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
         <div>
-          {Object.keys(user).map((key, index) => (
+          {Object.keys(props.user).map((key, index) => (
             <div
               key={index}
               className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
@@ -32,7 +46,7 @@ export default async function UserCard() {
               <span className="flex size-2 translate-y-1 rounded-full bg-sky-500" />
               <div className="space-y-1">
                 <p className="break-all text-sm font-medium leading-none">
-                  {user[key as keyof typeof user]}
+                  {props.user[key as keyof typeof props.user]}
                 </p>
                 <p className="text-sm text-muted-foreground">{key}</p>
               </div>
@@ -41,10 +55,10 @@ export default async function UserCard() {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">
+        <Button className="w-full" disabled={isPending} onClick={onLogOut}>
           <ExitIcon className="mr-2 size-4" /> Log out
         </Button>
       </CardFooter>
     </Card>
-  );
+  ) : null;
 }
