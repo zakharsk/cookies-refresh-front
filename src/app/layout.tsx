@@ -5,7 +5,6 @@ import './globals.css';
 import { ReactNode } from 'react';
 
 import { Header } from '@/components/header';
-import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 
@@ -43,7 +42,6 @@ export default function RootLayout({
           <Header />
           <main className={'flex justify-center'}>{children}</main>
           <Toaster />
-          <TailwindIndicator />
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

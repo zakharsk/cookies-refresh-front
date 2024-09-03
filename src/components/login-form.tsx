@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { EnterIcon } from '@radix-ui/react-icons';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
@@ -18,7 +19,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { LoginFormSchema, loginFormSchema } from '@/schemas';
-
 
 export function LoginForm() {
   const router = useRouter();
@@ -96,7 +96,9 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit" className="w-full">
+          <EnterIcon className="mr-2 size-4" /> Login
+        </Button>
       </form>
     </Form>
   );
