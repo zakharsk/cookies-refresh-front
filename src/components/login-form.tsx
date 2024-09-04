@@ -73,6 +73,7 @@ export function LoginForm() {
                   <Input
                     placeholder="Example: Elon"
                     autoComplete={'username'}
+                    disabled={isPending}
                     {...field}
                   />
                 </FormControl>
@@ -93,6 +94,7 @@ export function LoginForm() {
                   <Input
                     type={'password'}
                     autoComplete={'current-password'}
+                    disabled={isPending}
                     {...field}
                   />
                 </FormControl>
