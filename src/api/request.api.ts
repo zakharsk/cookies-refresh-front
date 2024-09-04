@@ -54,7 +54,6 @@ export async function apiRequest<T>(params: TApiRequest) {
     }
   } catch (err) {
     const error = err as Error;
-    console.error('Remote API request:', error.message);
     apiResponse.data = {
       message: error.message,
       statusCode: 0,
