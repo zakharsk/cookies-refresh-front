@@ -2,9 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EnterIcon } from '@radix-ui/react-icons';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState, useTransition } from 'react';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { submitLoginForm } from '@/actions';
@@ -19,7 +18,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/hooks/use-toast';
 import { LoginFormSchema, loginFormSchema } from '@/schemas';
 
@@ -27,40 +25,6 @@ export function LoginForm() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
-
-  const [timer, setTimer] = useState<number>(0);
-  const [isStarted, setIsStarted] = useState<boolean>(false);
-
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout | undefined = undefined;
-    if (isStarted) {
-      intervalId = setInterval(() => {
-        setTimer((prev) => prev + 1);
-      }, 1000);
-    }
-
-    if (timer === 3) {
-      toast({
-        title: 'It seems the server is unavailable',
-        description: `It's been ${timer} seconds since you clicked Login.
-            It seems that the API server was down for a period of inactivity.
-            Hosting is preempting that "Your free instance will spin down with
-            inactivity, which can delay requests by 50 seconds or more.". If
-            nothing changes after 60 seconds, please let me know.`,
-        action: (
-          <ToastAction altText="GitHub">
-            <Link
-              href={'https://github.com/zakharsk/cookies-refresh-front.git'}
-            >
-              GitHub
-            </Link>
-          </ToastAction>
-        ),
-      });
-    }
-
-    return () => clearInterval(intervalId);
-  }, [timer, isStarted, toast]);
 
   const form = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
@@ -71,7 +35,6 @@ export function LoginForm() {
   });
 
   async function onSubmit(values: LoginFormSchema) {
-    setIsStarted(true);
     startTransition(async () => {
       const res = await submitLoginForm(values);
       if (res.status === 200) router.push('/account');
@@ -142,8 +105,7 @@ export function LoginForm() {
             )}
           />
           <Button type="submit" className="w-full" disabled={isPending}>
-            {timer > 3 ? `[${timer}]` : <EnterIcon className="mr-2 size-4" />}{' '}
-            Login
+            <EnterIcon className="mr-2 size-4" /> Login
           </Button>
         </form>
       </Form>
