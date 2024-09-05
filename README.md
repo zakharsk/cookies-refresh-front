@@ -1,30 +1,29 @@
+## General
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Task
+Implement connections of Next.js 14 application to third-party API on an independent domain using standard Next.js 14 methods.
+Authorization for access is implemented using AccessToken with a short lifetime. RefreshToken with longer lifetime is used to update AccessToken.  Both tokens are stored in the user's browser cookies.
 
-First, run the development server:
+## Limitations
+- Do not use third-party query libraries like `Axios`
+- Do not use the dirty hack of redirecting API requests to Next.js `Route Handlers`
+- Do not use third-party cookie packages to bypass Next.js security mechanisms
+
+## Getting Started
+First of all you need to download and install the backend for this application from [here](https://github.com/zakharsk/cookies-refresh-back.git).
+
+Next, rename `.env.example` to `.env.local` and insert the values of the `ACCESS_JWT_SECRET` and `REFRESH_JWT_SECRET` variables you created during the backend deployment phase.
+
+Then, run the development server:
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Authorization
+Any pair of strings between 4 and 32 characters long is accepted as a username and password. An authorized user can permanently delete their data from the system at any time.
+There is no way to recover the password, so try not to forget it.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+If you use on-line [example](https://cookies-refresh-front.vercel.app/) application, the data will be written to free `Postgres` database on the [Koyeb](https://www.koyeb.com/) service, if you use it locally, the data will be stored in `SQLite`. 
