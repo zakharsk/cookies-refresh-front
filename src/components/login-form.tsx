@@ -37,18 +37,26 @@ export function LoginForm() {
   async function onSubmit(values: LoginFormSchema) {
     startTransition(async () => {
       const res = await submitLoginForm(values);
-      if (res.status === 200) router.push('/account');
-      if (res.status === 401) {
+
+      if (res.status === 200) {
+        router.push('/account');
+      } else if (res.status === 401) {
         toast({
           variant: 'destructive',
           title: 'Wrong credentials',
           description: 'Check your login and password.',
         });
         form.reset({ login: values.login });
-      }
-      if (res.status === 0) {
+      } else if (res.status >= 500 && res.status < 600) {
         toast({
-          title: 'It seems the server is unavailable',
+          variant: 'destructive',
+          title: 'Server error',
+          description: "It doesn't have to be like this. Let me know, please.",
+        });
+      } else if (res.status === 0) {
+        toast({
+          variant: 'destructive',
+          title: 'Connection failed',
           description:
             'Try again in 1 minute. If it fails again, please let me know.',
         });
