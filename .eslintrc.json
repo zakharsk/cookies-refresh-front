@@ -6,6 +6,7 @@
     "plugin:import/recommended",
     "plugin:import/typescript"
   ],
+  "ignorePatterns": ["src/components/ui/*tsx"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js"],
