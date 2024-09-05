@@ -35,7 +35,7 @@ export async function apiRequest<T>(params: TApiRequest) {
   };
 
   try {
-    const response = await fetch(request);
+    const response = await fetch(request, { cache: 'no-store' });
     const setCookieHeaders = response.headers.getSetCookie();
 
     if (setCookieHeaders.length > 0) {
