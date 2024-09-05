@@ -6,6 +6,8 @@ import { TCurrentUser } from '@/types';
 
 export async function getUserCurrent() {
   const userId = await extractUserId();
+  if (!userId) return;
+
   const res = await apiRequest<TCurrentUser>({
     path: `/users/${userId}`,
   });
