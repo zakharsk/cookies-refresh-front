@@ -9,9 +9,10 @@ import { TApiRequest, TApiResponse } from '@/types';
 
 export async function apiRequest<T>(params: TApiRequest) {
   const apiHost = process.env.API_HOST;
+  const apiPrefix = process.env.API_URL_PREFIX || '';
   const apiVersion = params.version || process.env.API_DEFAULT_VERSION;
 
-  const requestUrl = `${apiHost}/v${apiVersion}${params.path}`;
+  const requestUrl = `${apiHost}${apiPrefix}/v${apiVersion}${params.path}`;
   const method = params.method || 'GET';
 
   const request = new NextRequest(requestUrl, {
@@ -59,6 +60,11 @@ export async function apiRequest<T>(params: TApiRequest) {
       statusCode: 0,
     };
   }
+
+  // console.log('API: ', {
+  //   request: request.nextUrl.pathname,
+  //   response: apiResponse,
+  // });
 
   return apiResponse;
 }
