@@ -1,7 +1,7 @@
-export interface TUser {
+export type TUser = {
   id: string;
   login: string;
-}
+};
 
 export type TCurrentUser = TUser & {
   passwordHash: string;

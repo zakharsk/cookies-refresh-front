@@ -1,9 +1,10 @@
 'use client';
 
-import { ExitIcon } from '@radix-ui/react-icons';
+import { ExitIcon, TrashIcon } from '@radix-ui/react-icons';
 import { useTransition } from 'react';
 
 import { logOut } from '@/actions';
+import { deleteUser } from '@/actions/delete-user-button.action';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -28,7 +29,13 @@ export default function UserCard(props: TUserCardProps) {
     });
   };
 
-  return props.user ? (
+  const onDelete = () => {
+    startTransition(async () => {
+      await deleteUser();
+    });
+  };
+
+  return (
     <Card>
       <CardHeader>
         <CardTitle>{props.user.login}</CardTitle>
@@ -54,11 +61,19 @@ export default function UserCard(props: TUserCardProps) {
           ))}
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className={'flex flex-col gap-2'}>
         <Button className="w-full" disabled={isPending} onClick={onLogOut}>
           <ExitIcon className="mr-2 size-4" /> Log out
         </Button>
+        <Button
+          className="w-full"
+          variant={'destructive'}
+          disabled={isPending}
+          onClick={onDelete}
+        >
+          <TrashIcon className="mr-2 size-4" /> Delete user
+        </Button>
       </CardFooter>
     </Card>
-  ) : null;
+  );
 }
