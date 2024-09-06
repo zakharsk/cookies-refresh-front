@@ -1,5 +1,3 @@
-'use server';
-
 import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 
@@ -32,18 +30,20 @@ export async function apiRequest<T>(params: TApiRequest) {
   const apiResponse: TApiResponse<T> = {
     status: 0,
     data: null,
+    cookies: [],
   };
 
   try {
-    const response = await fetch(request, { cache: 'no-store' });
+    const response = await fetch(request);
     const setCookieHeaders = response.headers.getSetCookie();
 
     if (setCookieHeaders.length > 0) {
-      const cookieStore = cookies();
+      // const cookieStore = cookies();
 
       setCookieHeaders.forEach((setCookieHeader) => {
         const cookie = parseCookie(setCookieHeader);
-        if (cookie) cookieStore.set(cookie);
+        // if (cookie) cookieStore.set(cookie);
+        if (cookie) apiResponse.cookies.push(cookie);
       });
     }
 

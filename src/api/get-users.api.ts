@@ -1,5 +1,3 @@
-'use server';
-
 import { apiRequest } from '@/api/request.api';
 import { TUser } from '@/types';
 

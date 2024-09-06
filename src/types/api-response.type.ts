@@ -1,3 +1,5 @@
+import { TCookie } from '@/types/cookie.type';
+
 type TApiError = {
   message: string;
   statusCode: number;
@@ -5,5 +7,6 @@ type TApiError = {
 
 export type TApiResponse<T> = {
   status: number;
+  cookies: TCookie[];
   data: T | TApiError | null;
 };

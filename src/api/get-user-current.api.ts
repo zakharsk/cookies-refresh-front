@@ -1,5 +1,3 @@
-'use server';
-
 import { extractUserId } from '@/actions';
 import { apiRequest } from '@/api/request.api';
 import { TCurrentUser } from '@/types';
