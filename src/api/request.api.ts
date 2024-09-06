@@ -21,8 +21,7 @@ export async function apiRequest<T>(params: TApiRequest) {
     request.headers.set('Authorization', `Bearer ${params.bearerToken}`);
   }
 
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get(accessTokenCookieName);
+  const accessToken = cookies().get(accessTokenCookieName);
   if (accessToken && accessToken.value) {
     request.cookies.set(accessTokenCookieName, accessToken.value);
   }
@@ -38,11 +37,8 @@ export async function apiRequest<T>(params: TApiRequest) {
     const setCookieHeaders = response.headers.getSetCookie();
 
     if (setCookieHeaders.length > 0) {
-      // const cookieStore = cookies();
-
       setCookieHeaders.forEach((setCookieHeader) => {
         const cookie = parseCookie(setCookieHeader);
-        // if (cookie) cookieStore.set(cookie);
         if (cookie) apiResponse.cookies.push(cookie);
       });
     }
