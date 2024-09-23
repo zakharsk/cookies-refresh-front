@@ -8,7 +8,10 @@ import { refreshTokens } from '@/api/refresh-tokens.api';
 
 export function TokenRefresher() {
   const router = useRouter();
-  const tokensCheckInterval = 1000 * 10; // Check every 10 seconds
+  const tokensCheckInterval =
+    parseInt(
+      process.env.NEXT_PUBLIC_TOKENS_REFRESHER_INTERVAL_IN_SEC as string,
+    ) * 1000;
 
   useEffect(() => {
     const checkTokenExpiration = async () => {
