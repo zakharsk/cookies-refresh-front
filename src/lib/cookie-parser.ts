@@ -1,4 +1,4 @@
-import { TCookie } from '@/types';
+import { TCookie } from '@/types/cookie.type';
 
 export function parseCookie(cookieString: string) {
   if (!cookieString) return;

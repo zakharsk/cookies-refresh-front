@@ -1,4 +1,4 @@
-import { extractUserId } from '@/actions';
+import { extractUserId } from '@/actions/extract-user-id.action';
 import { apiRequest } from '@/api/request.api';
 
 export async function deleteUserCurrent() {
@@ -6,5 +6,6 @@ export async function deleteUserCurrent() {
   return apiRequest<null>({
     method: 'DELETE',
     path: `/users/${userId}`,
+    includeAccessToken: true,
   });
 }

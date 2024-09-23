@@ -1,4 +1,4 @@
-import { getUsers } from '@/api';
+import { getUsers } from '@/api/get-users.api';
 import {
   Table,
   TableBody,

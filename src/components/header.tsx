@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { getUserCurrent } from '@/api';
+import { getUserCurrent } from '@/api/get-user-current.api';
 import AuthLink from '@/components/auth-link';
 import { ModeToggle } from '@/components/mode-toggle';
 

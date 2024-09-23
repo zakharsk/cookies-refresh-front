@@ -1,8 +1,11 @@
 'use server';
 import { cookies } from 'next/headers';
 
-import { accessTokenCookieName, refreshTokenCookieName } from '@/constants';
-import { verifyToken } from '@/lib';
+import {
+  accessTokenCookieName,
+  refreshTokenCookieName,
+} from '@/constants/cookies';
+import { verifyToken } from '@/lib/verify-token';
 
 export async function extractUserId() {
   const cookieStore = cookies();

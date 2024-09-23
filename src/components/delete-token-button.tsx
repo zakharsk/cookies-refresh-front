@@ -2,7 +2,7 @@
 
 import { TrashIcon } from '@radix-ui/react-icons';
 
-import { expireCookie } from '@/actions';
+import { expireCookie } from '@/actions/expire-cookie.action';
 import { Button } from '@/components/ui/button';
 
 type TExpireButtonProps = {

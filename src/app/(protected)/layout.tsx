@@ -2,7 +2,7 @@ import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { RedirectType, redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 
-import { getUserCurrent } from '@/api';
+import { getUserCurrent } from '@/api/get-user-current.api';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export default async function ProtectedLayout({

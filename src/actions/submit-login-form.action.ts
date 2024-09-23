@@ -1,14 +1,24 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-import { apiRequest } from '@/api';
-import { LoginFormSchema } from '@/schemas';
+import { apiRequest } from '@/api/request.api';
 
-export async function submitLoginForm(formData: LoginFormSchema) {
-  formData.login = encodeURIComponent(formData.login);
-  formData.password = encodeURIComponent(formData.password);
-  const jsonString = JSON.stringify(formData);
+export async function submitLoginForm(
+  prevState: {
+    message: string | undefined;
+  },
+  formData: FormData,
+) {
+  const rawFormData = {
+    login: formData.get('login'),
+    password: formData.get('password'),
+  };
+
+  rawFormData.login = encodeURIComponent(`${rawFormData.login}`);
+  rawFormData.password = encodeURIComponent(`${rawFormData.password}`);
+  const jsonString = JSON.stringify(rawFormData);
   const b64String = btoa(jsonString);
 
   const loginRes = await apiRequest<null>({
@@ -16,10 +26,22 @@ export async function submitLoginForm(formData: LoginFormSchema) {
     bearerToken: b64String,
   });
 
-  const cookieStore = cookies();
-  loginRes.cookies.forEach((cookie) => {
-    cookieStore.set(cookie);
-  });
+  switch (loginRes.status) {
+    case 502:
+      prevState.message = 'Server is unavailable. Try again later.';
+      break;
 
-  return loginRes;
+    case 401:
+      prevState.message = 'Wrong username or password';
+      break;
+
+    case 200:
+      const cookieStore = cookies();
+      loginRes.cookies.forEach((cookie) => {
+        cookieStore.set(cookie);
+      });
+      redirect('/account');
+  }
+
+  return prevState;
 }

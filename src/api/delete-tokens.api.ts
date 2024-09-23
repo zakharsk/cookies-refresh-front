@@ -4,5 +4,6 @@ export async function deleteTokens() {
   return apiRequest({
     method: 'DELETE',
     path: '/tokens',
+    includeAccessToken: true,
   });
 }

@@ -1,4 +1,4 @@
-import { getUserCurrent } from '@/api';
+import { getUserCurrent } from '@/api/get-user-current.api';
 import CookiesPanel from '@/components/cookies-panel';
 import UserCard from '@/components/user-card';
 

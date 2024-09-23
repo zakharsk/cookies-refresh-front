@@ -1,6 +1,9 @@
 import ExpirationCounter from '@/components/expiration-counter';
-import { accessTokenCookieName, refreshTokenCookieName } from '@/constants';
-import { verifyToken } from '@/lib';
+import {
+  accessTokenCookieName,
+  refreshTokenCookieName,
+} from '@/constants/cookies';
+import { verifyToken } from '@/lib/verify-token';
 
 type ExpirationTimerProps = {
   name: string | undefined;
