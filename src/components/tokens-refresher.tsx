@@ -46,7 +46,6 @@ export function TokenRefresher() {
         if (success) {
           if (pathname === '/login') {
             router.push('/account');
-            console.log('LOGIN ROUTE');
           } else {
             router.refresh();
           }
