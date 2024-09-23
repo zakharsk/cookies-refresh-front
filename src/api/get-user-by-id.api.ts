@@ -1,10 +1,10 @@
-import { extractUserId } from '@/actions/extract-user-id.action';
 import { apiRequest } from '@/api/request.api';
 import { TCurrentUser } from '@/types/user.type';
 
-export async function getUserCurrent() {
-  const userId = await extractUserId();
-  if (!userId) return;
+export async function getUserById(userId: string | undefined) {
+  if (!userId) {
+    return;
+  }
 
   const userRes = await apiRequest<TCurrentUser>({
     path: `/users/${userId}`,

@@ -2,7 +2,6 @@
 
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 
 import { deleteTokensCookie } from '@/actions/delete-tokens-cookie.action';
 import { apiRequest } from '@/api/request.api';
@@ -22,9 +21,9 @@ export async function refreshTokens() {
       });
 
       revalidatePath('/');
-      break;
+      return true;
     default:
       await deleteTokensCookie();
-      redirect('/login');
+      return false;
   }
 }

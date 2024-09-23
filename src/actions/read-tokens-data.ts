@@ -7,8 +7,20 @@ import {
 } from '@/constants/cookies';
 import { verifyToken } from '@/lib/verify-token';
 
-export async function extractUserId() {
+export async function readTokensData() {
   const cookieStore = cookies();
+
+  type TTokensData = {
+    userId: string | undefined;
+    accessTokenExpiresIn: number | undefined;
+    refreshTokenExpiresIn: number | undefined;
+  };
+
+  const tokensData: TTokensData = {
+    userId: undefined,
+    accessTokenExpiresIn: 0,
+    refreshTokenExpiresIn: 0,
+  };
 
   const accessToken = cookieStore.get(accessTokenCookieName);
   if (accessToken && accessToken.value) {
@@ -16,7 +28,8 @@ export async function extractUserId() {
       accessToken.value,
       process.env.ACCESS_JWT_SECRET,
     );
-    return payload?.sub;
+    tokensData.userId = payload?.sub;
+    tokensData.accessTokenExpiresIn = payload?.exp;
   }
 
   const refreshToken = cookieStore.get(refreshTokenCookieName);
@@ -25,6 +38,12 @@ export async function extractUserId() {
       refreshToken.value,
       process.env.REFRESH_JWT_SECRET,
     );
-    return payload?.sub;
+
+    if (!tokensData.userId) {
+      tokensData.userId = payload?.sub;
+    }
+    tokensData.refreshTokenExpiresIn = payload?.exp;
   }
+
+  return tokensData;
 }

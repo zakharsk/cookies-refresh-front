@@ -1,4 +1,3 @@
-import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 
@@ -67,11 +66,6 @@ export async function apiRequest<T>(params: TApiRequest) {
 
     // Read response status
     apiResponse.status = response.status;
-    console.log('request.api', response.status);
-    if (response.status === 401) {
-      // revalidatePath('/(protected)', 'layout');
-      revalidatePath('/', 'layout');
-    }
 
     // Read content
     const contentTypeHeader = response.headers.get('Content-Type');
