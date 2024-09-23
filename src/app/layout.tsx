@@ -28,6 +28,8 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <TokenRefresher />
+
       <head>
         <title></title>
       </head>
@@ -40,7 +42,6 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           <main className={'flex justify-center'}>{children}</main>
-          <TokenRefresher />
           <Toaster />
           <Analytics />
         </ThemeProvider>

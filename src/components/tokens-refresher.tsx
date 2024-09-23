@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { readTokensData } from '@/actions/read-tokens-data';
@@ -12,6 +12,7 @@ export function TokenRefresher() {
     parseInt(
       process.env.NEXT_PUBLIC_TOKENS_REFRESHER_INTERVAL_IN_SEC as string,
     ) * 1000;
+  const pathname = usePathname();
 
   useEffect(() => {
     const checkTokenExpiration = async () => {
@@ -35,23 +36,32 @@ export function TokenRefresher() {
         ).getTime();
         const refreshTokenLifetime = refreshTokenDate - now;
         isExpiringSoon =
-          isExpiringSoon || refreshTokenLifetime < tokensCheckInterval * 2;
+          isExpiringSoon ||
+          !accessTokenExpiresIn ||
+          refreshTokenLifetime < tokensCheckInterval * 2;
       }
 
       if (isExpiringSoon) {
         const success = await refreshTokens();
         if (success) {
-          router.refresh();
+          if (pathname === '/login') {
+            router.push('/account');
+            console.log('LOGIN ROUTE');
+          } else {
+            router.refresh();
+          }
         } else {
           router.push('/login');
         }
       }
     };
 
+    checkTokenExpiration().finally();
+
     const intervalId = setInterval(checkTokenExpiration, tokensCheckInterval);
 
     return () => clearInterval(intervalId);
-  }, [router, tokensCheckInterval]);
+  }, [pathname, router, tokensCheckInterval]);
 
   return null;
 }
