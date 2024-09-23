@@ -7,7 +7,7 @@ import {
   refreshTokenCookieName,
 } from '@/constants/cookies';
 
-export async function deleteCookies() {
+export async function deleteTokensCookie() {
   const cookieStore = cookies();
   cookieStore.delete(refreshTokenCookieName);
   cookieStore.delete(accessTokenCookieName);
