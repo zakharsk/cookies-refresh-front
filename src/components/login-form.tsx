@@ -1,9 +1,9 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormState } from 'react-dom';
 
 import { submitLoginForm } from '@/actions/submit-login-form.action';
-import { Button } from '@/components/ui/button';
+import LoginButton from '@/components/login-button';
 import {
   Card,
   CardContent,
@@ -20,7 +20,6 @@ export function LoginForm() {
     message: undefined,
   };
   const [state, formAction] = useFormState(submitLoginForm, initialState);
-  const { pending } = useFormStatus();
 
   return (
     <section>
@@ -63,9 +62,7 @@ export function LoginForm() {
             )}
           </CardContent>
           <CardFooter>
-            <Button type={'submit'} className="w-full" aria-disabled={pending}>
-              Sign in
-            </Button>
+            <LoginButton />
           </CardFooter>
         </Card>
       </form>
