@@ -1,9 +1,9 @@
 'use server';
 
-import { deleteCookies } from '@/actions/delete-cookies.action';
-import { deleteTokens } from '@/api';
+import { deleteTokensCookie } from '@/actions/delete-tokens-cookie.action';
+import { deleteTokens } from '@/api/delete-tokens.api';
 
 export async function logOut() {
   await deleteTokens();
-  await deleteCookies();
+  await deleteTokensCookie();
 }

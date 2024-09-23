@@ -11,7 +11,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { accessTokenCookieName, refreshTokenCookieName } from '@/constants';
+import {
+  accessTokenCookieName,
+  refreshTokenCookieName,
+} from '@/constants/cookies';
 
 export default function CookiesPanel() {
   const cookieStore = cookies();

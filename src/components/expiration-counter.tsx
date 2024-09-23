@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { msToMinAndSec } from '@/lib';
+import { msToMinAndSec } from '@/lib/ms-to-m-s.lib';
 
 type ExpirationCounterProps = {
   exp: number;

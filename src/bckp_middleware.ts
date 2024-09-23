@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { accessTokenCookieName, refreshTokenCookieName } from '@/constants';
-import { parseCookie } from '@/lib';
+import {
+  accessTokenCookieName,
+  refreshTokenCookieName,
+} from '@/constants/cookies';
+import { parseCookie } from '@/lib/cookie-parser';
 
 export async function middleware(originalRequest: NextRequest) {
   const originalResponse = NextResponse.next({

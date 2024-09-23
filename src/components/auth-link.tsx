@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { TCurrentUser } from '@/types';
+import { TCurrentUser } from '@/types/user.type';
 
 type TAuthLinkProps = {
   user: TCurrentUser | undefined;

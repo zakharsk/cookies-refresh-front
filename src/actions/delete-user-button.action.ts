@@ -1,9 +1,9 @@
 'use server';
 
-import { deleteCookies } from '@/actions/delete-cookies.action';
-import { deleteUserCurrent } from '@/api';
+import { deleteTokensCookie } from '@/actions/delete-tokens-cookie.action';
+import { deleteUserCurrent } from '@/api/delete-user-current.api';
 
 export async function deleteUser() {
   await deleteUserCurrent();
-  await deleteCookies();
+  await deleteTokensCookie();
 }

@@ -2,7 +2,8 @@ import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { RedirectType, redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 
-import { getUserCurrent } from '@/api';
+import { readTokensData } from '@/actions/read-tokens-data';
+import { getUserById } from '@/api/get-user-by-id.api';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export default async function ProtectedLayout({
@@ -10,7 +11,9 @@ export default async function ProtectedLayout({
 }: {
   children: ReactNode;
 }) {
-  const user = await getUserCurrent();
+  const { userId } = await readTokensData();
+  const user = await getUserById(userId);
+
   if (!user) {
     redirect('/login', RedirectType.replace);
   }
@@ -24,6 +27,7 @@ export default async function ProtectedLayout({
           AccessToken cookie to be shown.
         </AlertDescription>
       </Alert>
+
       {children}
     </section>
   );

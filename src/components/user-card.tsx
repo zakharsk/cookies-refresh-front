@@ -3,8 +3,8 @@
 import { ExitIcon, TrashIcon } from '@radix-ui/react-icons';
 import { useTransition } from 'react';
 
-import { logOut } from '@/actions';
 import { deleteUser } from '@/actions/delete-user-button.action';
+import { logOut } from '@/actions/log-out-button.action';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -14,7 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { TCurrentUser } from '@/types';
+import { TCurrentUser } from '@/types/user.type';
 
 type TUserCardProps = {
   user: TCurrentUser;
